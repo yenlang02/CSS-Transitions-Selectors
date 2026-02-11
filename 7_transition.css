@@ -3,15 +3,14 @@
     Week 4: CSS Transitions and Selectors
 */
 
-/* ===============================
-   VARIABLES + RESET
-================================ */
+
+/* layout variables */
 :root{
   --menuWidth: max(170px, 15%);
   --headerHeight: 140px;
 }
 
-*{ 
+*{
   box-sizing: border-box; 
 }
 
@@ -21,22 +20,19 @@ body{
   background: #ffffff;
 }
 
-/* ===============================
-   LEFT NAV (your HTML uses: nav#menuItems)
-================================ */
 #menuItems{
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   width: var(--menuWidth);
-  background: #000;                 /* black area under buttons */
+  background: #000;                
   border-right: 2px solid #000;
   padding: 0;
   z-index: 2000;
 }
 
-/* 4 main buttons */
+/* 4 main navigation buttons */
 #menuItems button{
   width: 100%;
   display: block;
@@ -49,29 +45,23 @@ body{
   cursor: pointer;
 }
 
-/* hover main buttons -> gold */
+/* hover main buttons: background changes color */
 #menuItems button:hover{
   background: #caa24a;
 }
 
-/* ===============================
-   RECENT ARTICLES DROPDOWN LIST
-   (your HTML: button#recentArticles + ul#jumpMenu)
-================================ */
-
-/* hidden by default */
+/* article dropdown list*/
 #jumpMenu{
   display: none;
   margin: 0;
   padding: 10px 0;
   list-style: none;
-  background: #caa24a;              /* gold panel */
+  background: #caa24a;            
   border-bottom: 2px solid #000;
 }
 
-/* show list when hovering Recent Articles OR the list itself */
-#recentArticles:hover + #jumpMenu,
-#jumpMenu:hover{
+/* hovering "Recent Articles" navigation button: show list of articles */
+#recentArticles:hover + #jumpMenu, #jumpMenu:hover{
   display: block;
 }
 
@@ -80,20 +70,18 @@ body{
   display: block;
   padding: 2px 16px;
   text-decoration: none;
-  color: #0000ff;                   /* blue text */
+  color: #0000ff;                 
   font-size: 20px;
   background: transparent;
 }
 
-/* hover dropdown item -> blue highlight */
+/* hover article in dropdown list: changes color */
 #jumpMenu a:hover{
   background: #0000ff;
   color: #fff;
 }
 
-/* ===============================
-   MAIN CONTENT AREA
-================================ */
+/* the main content area */
 main{
   margin-left: var(--menuWidth);
   padding-top: var(--headerHeight);
@@ -101,9 +89,7 @@ main{
   min-height: 100vh;
 }
 
-/* ===============================
-   HEADER BAR (fixed top)
-================================ */
+/* header: fixed at top */
 header{
   position: fixed;
   top: 0;
@@ -113,7 +99,6 @@ header{
   background: #e00000;
   border-bottom: 2px solid #000;
   z-index: 1000;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,9 +121,7 @@ h1{
   color: #000;
 }
 
-/* ===============================
-   ARTICLES GRID
-================================ */
+/* journal articles grid: considers resizing window */
 #container{
   width: min(1400px, 96%);
   margin: 0 auto 60px auto;
@@ -148,23 +131,19 @@ h1{
   gap: 38px;
 }
 
-/* ===============================
-   ARTICLE EFFECTS (light -> dark + expand)
-================================ */
+/* article effects */
 #container article{
   width: 300px;
   line-height: 1.45;
-
-  scroll-margin-top: 160px;  /* NEWWWW */
-
-  color: #b6b6b6;                   /* light text at rest */
+  scroll-margin-top: 160px;
+  color: #b6b6b6;                 
   transition: color 2s, transform 2s;
   transform-origin: center top;
 }
 
 #container article:hover{
-  color: #111;                      /* darker */
-  transform: scale(1.10);           /* expand */
+  color: #111;                   
+  transform: scale(1.10);      
   position: relative;
   z-index: 5;
 }
@@ -174,13 +153,12 @@ h1{
   font-size: 28px;
 }
 
-/* main paragraph */
 #container article p{
   margin: 0 0 10px 0;
   font-size: 14px;
 }
 
-/* drop-cap first letter of FIRST paragraph only */
+/* first letter of article's main text */
 #container article p:first-of-type::first-letter{
   font-family: "Times New Roman", Times, serif;
   font-size: 36px;
@@ -189,13 +167,13 @@ h1{
   margin-right: 6px;
 }
 
-/* Read more link stays blue */
+/* read more link */
 #container article a{
   color: #1a0dab;
   text-decoration: underline;
 }
 
-/* external icon for Google links */
+/* link points to Google */
 #container article a[href*="google"]::after{
   content: "";
   display: inline-block;
@@ -208,9 +186,7 @@ h1{
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20fill='%23005bbb'%20d='M13%202h5v5h-2V5.41l-7.29%207.3-1.42-1.42%207.3-7.29H13V2z'/%3E%3Cpath%20fill='none'%20stroke='%23005bbb'%20stroke-width='2'%20d='M16%2012v5H3V4h5'/%3E%3C/svg%3E");
 }
 
-/* ===============================
-   THANK YOU BOX
-================================ */
+/* "Thank You" block */
 #thanks{
   position: fixed;
   right: 0;
@@ -229,9 +205,7 @@ h1{
   text-decoration: underline;
 }
 
-/* ===============================
-   FOOTER
-================================ */
+/* footer: looks neater */
 footer{
   padding: 30px 20px 80px 20px;
   border-top: 2px solid #000;
