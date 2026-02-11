@@ -11,7 +11,9 @@
   --headerHeight: 140px;
 }
 
-*{ box-sizing: border-box; }
+*{ 
+  box-sizing: border-box; 
+}
 
 body{
   margin: 0;
@@ -152,6 +154,8 @@ h1{
 #container article{
   width: 300px;
   line-height: 1.45;
+
+  scroll-margin-top: 160px;  /* NEWWWW */
 
   color: #b6b6b6;                   /* light text at rest */
   transition: color 2s, transform 2s;
