@@ -3,40 +3,211 @@
     Week 4: CSS Transitions and Selectors
 */
 
+
+/* layout variables */
+:root{
+  --menuWidth: max(170px, 15%);
+  --headerHeight: 140px;
+}
+
+*{ 
+  box-sizing: border-box; 
+}
+
+body{
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+}
+
+/* jump menu: fixed, spans the entire height of the page */
+#jumpMenu{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;  /* spans full height */
+  width: var(--menuWidth);
+  padding: 20px 10px;
+  background:#dea404;     
+  border-right: 2px solid #000;
+  overflow-y: auto;
+}
+
+#jumpMenu h2{
+  margin: 0 0 16px 0;
+  text-align: center;
+  font-family: "Times New Roman", serif;
+  font-size: 30px;
+}
+
+#jumpMenu a{
+  display: block;
+  padding: 14px 0;
+  text-align: center;
+  font-size: 18px;
+  color: #0b36ff;
+}
+
+/* the main content area */
+main{
+  margin-left: var(--menuWidth);
+  padding-top: var(--headerHeight);
+}
+
+/* header: fixed at top */
+header{
+  position: fixed;
+  top: 0;
+  left: var(--menuWidth);
+  width: calc(100% - var(--menuWidth));
+  height: var(--headerHeight);
+  z-index: 1000;
+  background: #e00000;
+  border-bottom: 2px solid #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  padding-top: 20px;           
+  padding-bottom: 20px;     
+}
+
+header p{
+  margin: 0 0 16px 0;   
+  text-align: center;    
+  font-size: 28px;
+  font-weight: 400;
+  font-family: "Times New Roman", serif;
+  color: #000;
+}
+
+/* buttons row */
+header nav{
+  margin-top: 18px; 
+  background: #000;          
+  display: flex;
+  justify-content: center;
+  gap: 40px;                    
+  padding: 0;          
+  height: 60px;       
+  align-items: center;
+}
+
+header nav button{                     
+  width: 260px;                 
+  padding: 14px 10px;
+  font-size: 24px;
+  height: 60px;       
+  padding: 0;        
+  color: #fff;
+  background: #0000ff;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+/* page title */
+h1{
+  margin: 45px 0 35px 0;  
+  padding: 10px 0;      
+  text-align: center;
+  font-size: 44px;
+  font-family: "Times New Roman", serif;
+}
+
+/* journal articles grid: considers resizing window */
+#container{
+  width: min(1400px, 96%);
+  margin: 0 auto 60px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center;
+  gap: 38px;
+}
+
+#container article{
+  width: 300px;        
+  line-height: 1.45;
+}
+
+#container article h2{
+  margin: 0 0 10px 0;
+  font-size: 28px;
+}
+
+#container article p{
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+/* "Thank You" block */
+#thanks{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  z-index: 1100;
+  padding: 18px 22px;
+  font-size: 40px;
+  font-family: "Times New Roman", serif;
+  background: #87cefa;
+  border: 2px solid #000;
+}
+
+/* footer: looks neater */
+footer{
+  padding: 30px 20px 80px 20px;
+  border-top: 2px solid #000;
+}
+
+footer p{
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+/* ADDITION */
+
 /* ----------------------------
    1) Drop-cap first letter
    (only the main paragraph text; NOT the "Read more" link)
 ---------------------------- */
 article p:first-of-type::first-letter{
-    font-family: "Times New Roman", Times, serif;
-    font-size: 36px;
-    line-height: 1;
-    float: left;
-    margin-right: 6px;
-  }
+  font-family: "Times New Roman", Times, serif;
+  font-size: 36px;
+  line-height: 1;
+  float: left;
+  margin-right: 6px;
+}
   
-  /* ----------------------------
-     2) Articles start light; on hover become darker + expand
-     (transition BOTH ways over 2 seconds)
-  ---------------------------- */
-  article{
-    color: #b6b6b6;                  /* light text at rest */
-    transition: color 2s, transform 2s;
-    transform-origin: center top;
-  }
+/* ----------------------------
+  2) Articles start light; on hover become darker + expand
+  (transition BOTH ways over 2 seconds)
+---------------------------- */
+article{
+  color: #b6b6b6;                  /* light text at rest */
+  transition: color 2s, transform 2s;
+  transform-origin: center top;
+}
   
-  article:hover{
-    color: #111;                     /* darker on hover */
-    transform: scale(1.10);          /* expand on hover */
-    z-index: 5;
-    position: relative;
-  }
+article:hover{
+  color: #111;                     /* darker on hover */
+  transform: scale(1.10);          /* expand on hover */
+  z-index: 5;
+  position: relative;
+}
   
-  /* Keep "Read more" unaffected (stays link-colored) */
-  article a{
-    color: #1a0dab;
-    text-decoration: underline;
-  }
+/* Keep "Read more" unaffected (stays link-colored) */
+article a{
+  color: #1a0dab;
+  text-decoration: underline;
+}
   
   /* ----------------------------
      3) Add external-link arrow to any Google link
