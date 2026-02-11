@@ -3,9 +3,8 @@
     Week 4: CSS Transitions and Selectors
 */
 
-
 /* ===============================
-   LAYOUT VARIABLES
+   VARIABLES + RESET
 ================================ */
 :root{
   --menuWidth: max(170px, 15%);
@@ -21,69 +20,71 @@ body{
 }
 
 /* ===============================
-   LEFT JUMP MENU
+   LEFT NAV (your HTML uses: nav#menuItems)
 ================================ */
-#jumpMenu{
+#menuItems{
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   width: var(--menuWidth);
-  padding: 20px 10px;
-  background: #000;                 /* black lower area like screenshot */
+  background: #000;                 /* black area under buttons */
   border-right: 2px solid #000;
-  overflow-y: auto;
+  padding: 0;
+  z-index: 2000;
 }
 
-/* LEFT MENU BUTTONS (BLUE WITH WHITE TEXT) */
-#jumpMenu a{
+/* 4 main buttons */
+#menuItems button{
+  width: 100%;
   display: block;
-  padding: 14px 0;
-  text-align: center;
-  font-size: 18px;
-  color: #fff;
   background: #0000ff;
+  color: #fff;
+  border: none;
   border-bottom: 2px solid #000;
-  text-decoration: none;
+  padding: 14px 10px;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-/* HOVER = GOLD */
-#jumpMenu a:hover{
+/* hover main buttons -> gold */
+#menuItems button:hover{
   background: #caa24a;
-  color: #fff;
 }
 
 /* ===============================
-   DROPDOWN (Recent Articles)
-   Only works if HTML has nested UL
+   RECENT ARTICLES DROPDOWN LIST
+   (your HTML: button#recentArticles + ul#jumpMenu)
 ================================ */
-#jumpMenu ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 
-#jumpMenu li{ position: relative; }
-
-#jumpMenu li ul{
+/* hidden by default */
+#jumpMenu{
   display: none;
-  background: #caa24a;
-  padding: 6px 0;
+  margin: 0;
+  padding: 10px 0;
+  list-style: none;
+  background: #caa24a;              /* gold panel */
+  border-bottom: 2px solid #000;
 }
 
-#jumpMenu li:hover > ul{
+/* show list when hovering Recent Articles OR the list itself */
+#recentArticles:hover + #jumpMenu,
+#jumpMenu:hover{
   display: block;
 }
 
-#jumpMenu li ul a{
+/* dropdown links */
+#jumpMenu a{
+  display: block;
+  padding: 2px 16px;
+  text-decoration: none;
+  color: #0000ff;                   /* blue text */
+  font-size: 20px;
   background: transparent;
-  color: #0000ff;
-  text-align: left;
-  padding: 3px 14px;
-  border: none;
 }
 
-#jumpMenu li ul a:hover{
+/* hover dropdown item -> blue highlight */
+#jumpMenu a:hover{
   background: #0000ff;
   color: #fff;
 }
@@ -94,10 +95,12 @@ body{
 main{
   margin-left: var(--menuWidth);
   padding-top: var(--headerHeight);
+  background: #f2f2f2;
+  min-height: 100vh;
 }
 
 /* ===============================
-   HEADER BAR
+   HEADER BAR (fixed top)
 ================================ */
 header{
   position: fixed;
@@ -105,55 +108,30 @@ header{
   left: var(--menuWidth);
   width: calc(100% - var(--menuWidth));
   height: var(--headerHeight);
-  z-index: 1000;
   background: #e00000;
   border-bottom: 2px solid #000;
+  z-index: 1000;
+
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 header p{
-  margin: 0 0 16px 0;
-  text-align: center;
-  font-size: 28px;
-  font-family: "Times New Roman", serif;
+  margin: 0;
+  font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #000;
 }
 
-/* HEADER NAV BUTTONS */
-header nav{
-  margin-top: 18px;
-  background: #000;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  height: 60px;
-  align-items: center;
-}
-
-header nav button{
-  width: 260px;
-  font-size: 24px;
-  height: 60px;
-  color: #fff;
-  background: #0000ff;
-  border: 2px solid #000;
-  cursor: pointer;
-}
-
-header nav button:hover{
-  background: #caa24a;
-}
-
-/* ===============================
-   PAGE TITLE
-================================ */
+/* page title */
 h1{
   margin: 45px 0 35px 0;
   text-align: center;
   font-size: 44px;
   font-family: "Times New Roman", serif;
+  color: #000;
 }
 
 /* ===============================
@@ -169,19 +147,20 @@ h1{
 }
 
 /* ===============================
-   ARTICLE STYLING
+   ARTICLE EFFECTS (light -> dark + expand)
 ================================ */
 #container article{
   width: 300px;
   line-height: 1.45;
-  color: #b6b6b6;
+
+  color: #b6b6b6;                   /* light text at rest */
   transition: color 2s, transform 2s;
   transform-origin: center top;
 }
 
 #container article:hover{
-  color: #111;
-  transform: scale(1.1);
+  color: #111;                      /* darker */
+  transform: scale(1.10);           /* expand */
   position: relative;
   z-index: 5;
 }
@@ -191,26 +170,28 @@ h1{
   font-size: 28px;
 }
 
+/* main paragraph */
 #container article p{
   margin: 0 0 10px 0;
   font-size: 14px;
 }
 
-/* DROP CAP FIRST LETTER */
+/* drop-cap first letter of FIRST paragraph only */
 #container article p:first-of-type::first-letter{
-  font-family: "Times New Roman", serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 36px;
+  line-height: 1;
   float: left;
   margin-right: 6px;
 }
 
-/* READ MORE LINKS */
+/* Read more link stays blue */
 #container article a{
   color: #1a0dab;
   text-decoration: underline;
 }
 
-/* EXTERNAL LINK ICON */
+/* external icon for Google links */
 #container article a[href*="google"]::after{
   content: "";
   display: inline-block;
@@ -218,9 +199,9 @@ h1{
   height: 20px;
   margin-left: 6px;
   vertical-align: -3px;
-  background-size: contain;
   background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23005bbb' d='M13 2h5v5h-2V5.41l-7.29 7.3-1.42-1.42 7.3-7.29H13V2z'/%3E%3Cpath fill='none' stroke='%23005bbb' stroke-width='2' d='M16 12v5H3V4h5'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20fill='%23005bbb'%20d='M13%202h5v5h-2V5.41l-7.29%207.3-1.42-1.42%207.3-7.29H13V2z'/%3E%3Cpath%20fill='none'%20stroke='%23005bbb'%20stroke-width='2'%20d='M16%2012v5H3V4h5'/%3E%3C/svg%3E");
 }
 
 /* ===============================
@@ -230,11 +211,18 @@ h1{
   position: fixed;
   right: 0;
   bottom: 0;
+  margin: 0;
+  z-index: 1100;
   padding: 18px 22px;
   font-size: 40px;
   font-family: "Times New Roman", serif;
   background: #87cefa;
   border: 2px solid #000;
+}
+
+#thanks a{
+  color: #0000ff;
+  text-decoration: underline;
 }
 
 /* ===============================
@@ -243,6 +231,7 @@ h1{
 footer{
   padding: 30px 20px 80px 20px;
   border-top: 2px solid #000;
+  background: #f2f2f2;
 }
 
 footer p{
