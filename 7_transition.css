@@ -3,15 +3,16 @@
     Week 4: CSS Transitions and Selectors
 */
 
-/* layout variables */
+
+/* ===============================
+   LAYOUT VARIABLES
+================================ */
 :root{
   --menuWidth: max(170px, 15%);
   --headerHeight: 140px;
 }
 
-*{ 
-  box-sizing: border-box; 
-}
+*{ box-sizing: border-box; }
 
 body{
   margin: 0;
@@ -19,26 +20,22 @@ body{
   background: #ffffff;
 }
 
-/* jump menu: fixed, spans the entire height of the page */
+/* ===============================
+   LEFT JUMP MENU
+================================ */
 #jumpMenu{
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;  /* spans full height */
+  bottom: 0;
   width: var(--menuWidth);
   padding: 20px 10px;
-  background:#dea404;     
+  background: #000;                 /* black lower area like screenshot */
   border-right: 2px solid #000;
   overflow-y: auto;
 }
 
-#jumpMenu h2{
-  margin: 0 0 16px 0;
-  text-align: center;
-  font-family: "Times New Roman", serif;
-  font-size: 30px;
-}
-
+/* LEFT MENU BUTTONS (BLUE WITH WHITE TEXT) */
 #jumpMenu a{
   display: block;
   padding: 14px 0;
@@ -50,13 +47,58 @@ body{
   text-decoration: none;
 }
 
-/* the main content area */
+/* HOVER = GOLD */
+#jumpMenu a:hover{
+  background: #caa24a;
+  color: #fff;
+}
+
+/* ===============================
+   DROPDOWN (Recent Articles)
+   Only works if HTML has nested UL
+================================ */
+#jumpMenu ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#jumpMenu li{ position: relative; }
+
+#jumpMenu li ul{
+  display: none;
+  background: #caa24a;
+  padding: 6px 0;
+}
+
+#jumpMenu li:hover > ul{
+  display: block;
+}
+
+#jumpMenu li ul a{
+  background: transparent;
+  color: #0000ff;
+  text-align: left;
+  padding: 3px 14px;
+  border: none;
+}
+
+#jumpMenu li ul a:hover{
+  background: #0000ff;
+  color: #fff;
+}
+
+/* ===============================
+   MAIN CONTENT AREA
+================================ */
 main{
   margin-left: var(--menuWidth);
   padding-top: var(--headerHeight);
 }
 
-/* header: fixed at top */
+/* ===============================
+   HEADER BAR
+================================ */
 header{
   position: fixed;
   top: 0;
@@ -68,54 +110,55 @@ header{
   border-bottom: 2px solid #000;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
-  padding-top: 20px;           
-  padding-bottom: 20px;     
+  justify-content: flex-start;
+  padding-top: 20px;
 }
 
 header p{
-  margin: 0 0 16px 0;   
-  text-align: center;    
+  margin: 0 0 16px 0;
+  text-align: center;
   font-size: 28px;
-  font-weight: 400;
   font-family: "Times New Roman", serif;
-  color: #000;
 }
 
-/* buttons row */
+/* HEADER NAV BUTTONS */
 header nav{
-  margin-top: 18px; 
-  background: #000;          
+  margin-top: 18px;
+  background: #000;
   display: flex;
   justify-content: center;
-  gap: 40px;                    
-  padding: 0;          
-  height: 60px;       
+  gap: 40px;
+  height: 60px;
   align-items: center;
 }
 
-header nav button{                     
-  width: 260px;                 
-  padding: 14px 10px;
+header nav button{
+  width: 260px;
   font-size: 24px;
-  height: 60px;       
-  padding: 0;        
+  height: 60px;
   color: #fff;
   background: #0000ff;
   border: 2px solid #000;
   cursor: pointer;
 }
 
-/* page title */
+header nav button:hover{
+  background: #caa24a;
+}
+
+/* ===============================
+   PAGE TITLE
+================================ */
 h1{
-  margin: 45px 0 35px 0;  
-  padding: 10px 0;      
+  margin: 45px 0 35px 0;
   text-align: center;
   font-size: 44px;
   font-family: "Times New Roman", serif;
 }
 
-/* journal articles grid: considers resizing window */
+/* ===============================
+   ARTICLES GRID
+================================ */
 #container{
   width: min(1400px, 96%);
   margin: 0 auto 60px auto;
@@ -125,9 +168,22 @@ h1{
   gap: 38px;
 }
 
+/* ===============================
+   ARTICLE STYLING
+================================ */
 #container article{
-  width: 300px;        
+  width: 300px;
   line-height: 1.45;
+  color: #b6b6b6;
+  transition: color 2s, transform 2s;
+  transform-origin: center top;
+}
+
+#container article:hover{
+  color: #111;
+  transform: scale(1.1);
+  position: relative;
+  z-index: 5;
 }
 
 #container article h2{
@@ -140,13 +196,40 @@ h1{
   font-size: 14px;
 }
 
-/* "Thank You" block */
+/* DROP CAP FIRST LETTER */
+#container article p:first-of-type::first-letter{
+  font-family: "Times New Roman", serif;
+  font-size: 36px;
+  float: left;
+  margin-right: 6px;
+}
+
+/* READ MORE LINKS */
+#container article a{
+  color: #1a0dab;
+  text-decoration: underline;
+}
+
+/* EXTERNAL LINK ICON */
+#container article a[href*="google"]::after{
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  vertical-align: -3px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23005bbb' d='M13 2h5v5h-2V5.41l-7.29 7.3-1.42-1.42 7.3-7.29H13V2z'/%3E%3Cpath fill='none' stroke='%23005bbb' stroke-width='2' d='M16 12v5H3V4h5'/%3E%3C/svg%3E");
+}
+
+/* ===============================
+   THANK YOU BOX
+================================ */
 #thanks{
   position: fixed;
   right: 0;
   bottom: 0;
-  margin: 0;
-  z-index: 1100;
   padding: 18px 22px;
   font-size: 40px;
   font-family: "Times New Roman", serif;
@@ -154,7 +237,9 @@ h1{
   border: 2px solid #000;
 }
 
-/* footer: looks neater */
+/* ===============================
+   FOOTER
+================================ */
 footer{
   padding: 30px 20px 80px 20px;
   border-top: 2px solid #000;
@@ -163,101 +248,4 @@ footer{
 footer p{
   margin: 0 0 10px 0;
   font-weight: 700;
-}
-
-
-
-/* ADDITION */
-/* =========================
-   ADDITIONS (no conflicts)
-   ========================= */
-
-/* 1) Drop-cap first letter (only inside articles in #container) */
-#container article p:first-of-type::first-letter{
-  font-family: "Times New Roman", Times, serif;
-  font-size: 36px;
-  line-height: 1;
-  float: left;
-  margin-right: 6px;
-}
-
-/* 2) Articles start light; on hover darker + expand (2 seconds both ways) */
-#container article{
-  color: #b6b6b6;
-  transition: color 2s, transform 2s;
-  transform-origin: center top;
-}
-
-#container article:hover{
-  color: #111;
-  transform: scale(1.10);
-  position: relative;
-  z-index: 5;
-}
-
-/* Keep "Read more" link blue and not “washed out” */
-#container article a{
-  color: #1a0dab;
-  text-decoration: underline;
-}
-
-/* 3) Add external-link arrow to Google links */
-#container article a[href*="google"]::after{
-  content: "";
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-left: 6px;
-  vertical-align: -3px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20fill='%23005bbb'%20d='M13%202h5v5h-2V5.41l-7.29%207.3-1.42-1.42%207.3-7.29H13V2z'/%3E%3Cpath%20fill='none'%20stroke='%23005bbb'%20stroke-width='2'%20d='M16%2012v5H3V4h5'/%3E%3C/svg%3E");
-}
-
-/* 4) Nav buttons hover background change (your header nav buttons) */
-header nav button:hover{
-  background: #caa24a;
-}
-
-/* 5) Jump menu button hover background change (left menu links) */
-#jumpMenu a:hover{
-  background: #caa24a;
-  color: #fff;
-}
-
-/* 6) Recent Articles dropdown (ONLY works if your HTML has nested <ul> inside Recent Articles) */
-#jumpMenu ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#jumpMenu li{ position: relative; }
-
-/* Hide submenu by default */
-#jumpMenu li ul{
-  display: none;
-  background: #caa24a;
-  margin: 0;
-  padding: 6px 0;
-}
-
-/* Show submenu when hovering parent item */
-#jumpMenu li:hover > ul{
-  display: block;
-}
-
-/* Submenu links */
-#jumpMenu li ul a{
-  background: transparent;
-  color: #0000ff;
-  text-align: left;
-  padding: 3px 14px;
-  border: none;
-}
-
-/* Hover over submenu link = bg + text color change */
-#jumpMenu li ul a:hover{
-  background: #0000ff;
-  color: #fff;
 }
